@@ -11,11 +11,17 @@ import generalRoutes from './routes/general.js';
 import managementRoutes from './routes/management.js';
 import salesRoutes from './routes/sales.js';
 
+// data imports
+import User from "./models/user.js";
+import Product from "./models/Product.js";
+import ProductStat from "./models/ProdustStat.js";
+import { dataUser, dataProduct, dataProductStat } from "./data/index.js";
+
 /* Config */
 dotenv.config();
 const app = express();
 app.use(express.json());
-app.use(helmet);
+app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({policy: "cross-origin"}));
 app.use(morgan("common"));
 app.use(bodyParser.json());
@@ -30,10 +36,17 @@ app.use("/sales", salesRoutes);
 
 /* Mongoose Setup */
 
-const PORT = process.env.PORT || 9000;
+const PORT = process.env.PORT || 9000; 
 mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => {
+    
     app.listen(PORT, () => console.log(`Server port: ${PORT}`))
+
+    //User.insertMany(dataUser);
+    // Product.insertMany(dataProduct);
+    // ProductStat.insertMany(dataProductStat);
+
+
 }).catch((error) => console.log(`${error} did not connect.`))
