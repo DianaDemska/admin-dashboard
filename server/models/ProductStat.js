@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const ProductStatSchema = new mongoose.Schema(
     {
-        poductId: String,
+        productId: String,
         yearlySalesTotal: Number,
         yearlyTotalSoldUnits: Number,
         year: Number,
@@ -17,7 +17,7 @@ const ProductStatSchema = new mongoose.Schema(
             date: String,
             totalSales: Number,
             totalUnits: Number,
-        }
+        },
     },
     { timestamps: true }
 );
