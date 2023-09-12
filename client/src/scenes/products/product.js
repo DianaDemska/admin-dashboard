@@ -22,7 +22,7 @@ const Product = ({
 } ) => {
     const theme = useTheme();
     const [isExpanded, setIsExpanded] = useState(false);
-    console.log("stat:", stat);
+
 
     return (
         <Card
