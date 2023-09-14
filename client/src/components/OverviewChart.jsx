@@ -45,6 +45,7 @@ const OverviewChart = ({ isDashboard = false, view }) => {
   }, [data]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!data || isLoading) return "Loading...";
+
   return (
     <ResponsiveLine
       data={view === "sales" ? totalSalesLine : totalUnitsLine}
@@ -83,7 +84,6 @@ const OverviewChart = ({ isDashboard = false, view }) => {
       }}
       margin={{ top: 20, right: 50, bottom: 50, left: 70 }}
       xScale={{ type: "point" }}
-      xFormat=" >-"
       yScale={{
         type: "linear",
         min: "auto",
@@ -93,6 +93,7 @@ const OverviewChart = ({ isDashboard = false, view }) => {
       }}
       yFormat=" >-.2f"
       curve="catmullRom"
+      enableArea={isDashboard}
       axisTop={null}
       axisRight={null}
       axisBottom={{
@@ -100,6 +101,7 @@ const OverviewChart = ({ isDashboard = false, view }) => {
           if (isDashboard) return v.slice(0, 3);
           return v;
         },
+        orient: "bottom",
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
@@ -108,6 +110,8 @@ const OverviewChart = ({ isDashboard = false, view }) => {
         legendPosition: "middle",
       }}
       axisLeft={{
+        orient: "left",
+        tickValues: 5,
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
@@ -124,9 +128,8 @@ const OverviewChart = ({ isDashboard = false, view }) => {
       pointBorderWidth={2}
       pointBorderColor={{ from: "serieColor" }}
       pointLabelYOffset={-12}
-      enableArea={true}
       useMesh={true}
-      legends={[
+      legends={
         !isDashboard
           ? [
               {
@@ -154,8 +157,8 @@ const OverviewChart = ({ isDashboard = false, view }) => {
                 ],
               },
             ]
-          : undefined,
-      ]}
+          : undefined
+      }
     />
   );
 };
