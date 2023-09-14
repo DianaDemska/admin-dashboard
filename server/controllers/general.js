@@ -1,6 +1,6 @@
 import Transaction from "../models/Transaction.js";
 import OverallStat from "../models/OverallStat.js";
-import User from "../models/User.js";
+import User from "../models/user.js";
 
 
 export const getUser = async (req, res) => {
